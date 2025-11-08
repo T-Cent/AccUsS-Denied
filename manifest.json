@@ -1,19 +1,31 @@
 {
-  "manifest_version": 2,
-  "name": "AccUsS Denied",
-  "version": "1.0",
-
-  "description": "Privacy extension",
-
-  "icons": {
-    "48": "icons/privacy-4-svgrepo-com.svg",
-    "96": "icons/privacy-4-svgrepo-com.svg"
-  },
-
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["accuss-denied.js"]
-    }
-  ]
+    "manifest_version": 2,
+    "name": "AccUsS Denied",
+    "version": "1.0",
+    "description": "Privacy extension",
+    "homepage_url": "https://github.com/T-Cent/AccUsS-Denied",
+    "icons": {
+        "48": "icons/privacy-4-svgrepo-com.svg",
+        "96": "icons/privacy-4-svgrepo-com.svg"
+    },
+    "browser_action": {
+        "default_icon": "icons/privacy-4-svgrepo-com.svg",
+        "default_title": "AccUsS Denied",
+        "default_popup": "popup/invigilate.html"
+    },
+    "permissions": [
+        "activeTab",
+        "tabs",
+        "https://http-observatory.security.mozilla.org/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "accuss-denied.js"
+            ]
+        }
+    ]
 }

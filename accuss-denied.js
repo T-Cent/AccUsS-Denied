@@ -1,1 +1,2 @@
-console.log("I am being used");
+console.log("suspicious site, try to avoid");
+alert("be wary")

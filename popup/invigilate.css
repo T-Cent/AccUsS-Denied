@@ -1,0 +1,55 @@
+button:hover {
+    color: bisque;
+}
+
+/* Grade badge styles */
+#grade-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 28px;
+    border-radius: 14px;
+    color: white;
+    font-weight: 700;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15) inset;
+    transition: background-color 180ms ease, transform 120ms ease;
+}
+
+#grade-badge.grade-A {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+#grade-badge.grade-B {
+    background: linear-gradient(90deg, #7bd389, #5bb26e);
+    color: #012109
+}
+
+#grade-badge.grade-C {
+    background: linear-gradient(90deg, #f1c40f, #f39c12);
+}
+
+#grade-badge.grade-D {
+    background: linear-gradient(90deg, #e67e22, #d35400);
+}
+
+#grade-badge.grade-F {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+#grade-badge.unknown {
+    background: #95a5a6;
+    color: #0b0b0b
+}
+
+#grade-badge.small {
+    width: 36px;
+    height: 24px;
+    border-radius: 12px;
+    font-size: 12px
+}
+
+#grade-badge:hover {
+    transform: translateY(-1px)
+}
