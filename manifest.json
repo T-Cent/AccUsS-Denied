@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "AccUsS Denied",
+  "version": "1.0",
+
+  "description": "Privacy extension",
+
+  "icons": {
+    "48": "icons/privacy-4-svgrepo-com.svg",
+    "96": "icons/privacy-4-svgrepo-com.svg"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["accuss-denied.js"]
+    }
+  ]
+}
