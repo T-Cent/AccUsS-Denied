@@ -1,2 +1,3 @@
-console.log("suspicious site, try to avoid");
-alert("be wary")
+alert("i was startled")
+
+console.log(window.location.href);

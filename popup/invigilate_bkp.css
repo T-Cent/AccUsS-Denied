@@ -1,0 +1,296 @@
+button:hover {
+    color: bisque;
+}
+
+/* Grade badge styles */
+#grade-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 28px;
+    border-radius: 14px;
+    color: white;
+    font-weight: 700;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15) inset;
+    transition: background-color 180ms ease, transform 120ms ease;
+}
+
+#grade-badge.grade-A {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+#grade-badge.grade-B {
+    background: linear-gradient(90deg, #7bd389, #5bb26e);
+    color: #012109;
+}
+
+#grade-badge.grade-C {
+    background: linear-gradient(90deg, #f1c40f, #f39c12);
+}
+
+#grade-badge.grade-D {
+    background: linear-gradient(90deg, #e67e22, #d35400);
+}
+
+#grade-badge.grade-F {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+#grade-badge.unknown {
+    background: #95a5a6;
+    color: #0b0b0b;
+}
+
+#grade-badge.small {
+    width: 36px;
+    height: 24px;
+    border-radius: 12px;
+    font-size: 12px;
+}
+
+#grade-badge:hover {
+    transform: translateY(-1px);
+}
+
+:root {
+    --bg: #ffffff;
+    --panel: #fbfbfc;
+    --muted: #6b7280;
+    --accent: #0f172a;
+    --primary: #0b79ff;
+    --success: #24b47e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --radius: 10px;
+    --shadow: 0 6px 18px rgba(11, 15, 26, 0.06);
+    --gap: 12px;
+    font-size: 14px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--accent);
+}
+
+.popup {
+    width: 360px;
+    max-width: 100%;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.popup-header {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.title {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.subtitle {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.content {
+    background: var(--panel);
+    border-radius: var(--radius);
+    padding: 12px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.intro {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+}
+
+.btn {
+    appearance: none;
+    border: 1px solid transparent;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--accent);
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.btn.primary {
+    background: linear-gradient(180deg, var(--primary), #006ae6);
+    color: white;
+    border-color: rgba(3, 102, 214, 0.12);
+    box-shadow: 0 3px 8px rgba(11, 15, 26, 0.06);
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn:focus {
+    outline: 2px solid rgba(11, 79, 255, 0.12);
+    outline-offset: 2px;
+}
+
+.status-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.grade-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 28px;
+    border-radius: 14px;
+    font-weight: 700;
+    color: white;
+    font-size: 13px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06) inset;
+    transition: transform 140ms ease, background 180ms;
+}
+
+.grade-badge.unknown {
+    background: #c7c9cc;
+    color: #0b0b0b;
+}
+
+.grade-badge.grade-A {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+.grade-badge.grade-B {
+    background: linear-gradient(90deg, #7bd389, #5bb26e);
+    color: #05210e;
+}
+
+.grade-badge.grade-C {
+    background: linear-gradient(90deg, #f1c40f, #f59e0b);
+    color: #111;
+}
+
+.grade-badge.grade-D {
+    background: linear-gradient(90deg, #f97316, #d35400);
+    color: #111;
+}
+
+.grade-badge.grade-F {
+    background: linear-gradient(90deg, #ef4444, #c53030);
+    color: #fff;
+}
+
+.status {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.result {
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #eef2f7;
+    max-height: 240px;
+    overflow: auto;
+    font-size: 12px;
+    color: #111;
+}
+
+.footer {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+    padding-top: 2px;
+}
+
+@media (max-width: 360px) {
+    .popup {
+        width: 320px;
+    }
+
+    .grade-badge {
+        width: 40px;
+        height: 26px;
+    }
+}
+
+button:hover {
+    color: bisque;
+}
+
+/* Grade badge styles */
+#grade-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 28px;
+    border-radius: 14px;
+    color: white;
+    font-weight: 700;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.15) inset;
+    transition: background-color 180ms ease, transform 120ms ease;
+}
+
+#grade-badge.grade-A {
+    background: linear-gradient(90deg, #2ecc71, #27ae60);
+}
+
+#grade-badge.grade-B {
+    background: linear-gradient(90deg, #7bd389, #5bb26e);
+    color: #012109
+}
+
+#grade-badge.grade-C {
+    background: linear-gradient(90deg, #f1c40f, #f39c12);
+}
+
+#grade-badge.grade-D {
+    background: linear-gradient(90deg, #e67e22, #d35400);
+}
+
+#grade-badge.grade-F {
+    background: linear-gradient(90deg, #e74c3c, #c0392b);
+}
+
+#grade-badge.unknown {
+    background: #95a5a6;
+    color: #0b0b0b
+}
+
+#grade-badge.small {
+    width: 36px;
+    height: 24px;
+    border-radius: 12px;
+    font-size: 12px
+}
+
+#grade-badge:hover {
+    transform: translateY(-1px)
+}

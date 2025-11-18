@@ -1,27 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="invigilate.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="invigilate.css"/>
 </head>
-
 <body>
-    <h1>This is <strong>AccUsS Denied</strong></h1>
-    A privacy focused extension aimed to bringing you the best of security with an intuitive, non-technical and
-    simplistic interface.
-    <h2>Site metrics:</h2>
-    <div>
-        <button id="observatory-btn">Check with HTTP Observatory</button>
-        <button id="report-unsafe">Report site unsafe</button>
-    </div>
-    <div style="display:flex;align-items:center;margin-top:10px;gap:8px">
-        <div id="grade-badge" aria-hidden="true" title="Observatory grade" style="min-width:48px"></div>
-        <div id="obs-status" aria-live="polite"></div>
-    </div>
-    <pre id="obs-result"
-        style="white-space:pre-wrap;max-height:240px;overflow:auto;background:#f6f6f6;padding:8px;border-radius:4px;margin-top:8px"></pre>
+    <!-- <img src="../icons/privacy-4-svgrepo-com.svg"/> -->
+    <h1>This is AccUsS Denied</h1>
+
+    <button id="observatory">Check with HTTP Observatory</button>
+    <button id="unsafe">Report unsafe</button>
+  
     <script src="invigilate.js"></script>
 </body>
-
 </html>

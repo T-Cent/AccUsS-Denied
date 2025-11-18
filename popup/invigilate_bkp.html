@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="invigilate.css" />
+</head>
+<div class="popup">
+    <header class="popup-header">
+        <div class="title">AccUsS Denied</div>
+        <div class="subtitle">Privacy-focused site auditor</div>
+    </header>
+
+    <main class="content">
+        <p class="intro">A privacy focused extension delivering security metrics and guidance.</p>
+
+        <section class="controls">
+            <button id="observatory-btn" class="btn primary">Check with HTTP Observatory</button>
+            <button id="report-unsafe" class="btn">Report site</button>
+        </section>
+
+        <section class="status-row">
+            <div id="grade-badge" class="grade-badge unknown" aria-hidden="true" title="Observatory grade"></div>
+            <div id="obs-status" class="status" aria-live="polite">Idle</div>
+        </section>
+
+        <pre id="obs-result" class="result" aria-hidden="false"></pre>
+    </main>
+
+    <footer class="footer">v1.0</footer>
+</div>
+
+<script src="invigilate.js"></script>
+</div>
+<pre id="obs-result"
+    style="white-space:pre-wrap;max-height:240px;overflow:auto;background:#f6f6f6;padding:8px;border-radius:4px;margin-top:8px"></pre>
+<script src="invigilate.js"></script>
+</body>
+
+</html>
