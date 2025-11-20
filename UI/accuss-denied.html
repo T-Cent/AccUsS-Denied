@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>acUsS denied</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="accuss-denied.css" />
+</head>
+<body>
+    <main class="popup">
+        <header class="popup__header">
+            <div class="logo">
+                <span class="logo__shield"></span>
+            </div>
+            <div class="header-text">
+                <h1 class="app-name">acUsS denied</h1>
+                <p class="tagline">Suspicious content blocked for your safety.</p>
+            </div>
+        </header>
+
+        <section class="popup__site">
+            <span class="section-label">Current site</span>
+            <div class="site-row">
+                <!-- Your JS can overwrite this text with the real hostname -->
+                <span id="site-host" class="site-host">example-malicious-site.com</span>
+                <span class="badge badge--danger">High risk</span>
+            </div>
+            <p class="site-message">
+                We detected patterns similar to known phishing / malware sites.
+                Proceed only if you absolutely trust this website.
+            </p>
+        </section>
+
+        <section class="popup__actions">
+            <button id="observatory-btn"
+                    class="btn btn-secondary"
+                    title="MDN's URI validator">
+                Check with HTTP Observatory
+            </button>
+
+            <button id="mail-btn"
+                    class="btn btn-secondary"
+                    title="Mail us">
+                Report unsafe website
+            </button>
+        </section>
+
+        <section class="popup__decision">
+            <button id="go-back-btn" class="btn btn-ghost">
+                Go back to safety
+            </button>
+            <button id="proceed-btn" class="btn btn-danger">
+                Proceed anyway
+            </button>
+        </section>
+
+        <section class="popup__footer">
+            <button id="theme-btn" class="link-btn" title="Change theme">
+                Toggle theme
+            </button>
+            <span class="footer-text">Protected by <strong>acUsS denied</strong></span>
+        </section>
+    </main>
+
+    <script src="accuss-denied.js"></script>
+</body>
+</html>
