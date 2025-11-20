@@ -9,8 +9,16 @@
 <body>
     <main class="popup">
         <header class="popup__header">
-            <div class="logo">
-                <span class="logo__shield"></span>
+            <div class="logo" aria-hidden="true">
+                <svg class="logo__stop" viewBox="0 0 64 64" focusable="false">
+                    <path class="logo__shape" d="M24 2h16l22 22v16l-22 22H24L2 40V24z" />
+                    <path class="logo__shape-inner" d="M25.5 6h13l19.5 19.5v13L38.5 58h-13L6 38.5v-13z" />
+                    <text class="logo__text"
+                          x="32"
+                          y="33"
+                          text-anchor="middle"
+                          dominant-baseline="middle">AccUSs</text>
+                </svg>
             </div>
             <div class="header-text">
                 <h1 class="app-name">acUsS denied</h1>
@@ -55,8 +63,34 @@
         </section>
 
         <section class="popup__footer">
-            <button id="theme-btn" class="link-btn" title="Change theme">
-                Toggle theme
+            <button id="theme-btn"
+                    class="theme-toggle"
+                    type="button"
+                    title="Switch between light and dark themes"
+                    aria-pressed="false"
+                    data-mode="dark">
+                <span class="theme-toggle__icon" aria-hidden="true">
+                    <svg class="theme-toggle__svg theme-toggle__svg--sun" viewBox="0 0 24 24" focusable="false">
+                        <circle cx="12" cy="12" r="5" />
+                        <g>
+                            <line x1="12" y1="2" x2="12" y2="5" />
+                            <line x1="12" y1="19" x2="12" y2="22" />
+                            <line x1="4.22" y1="4.22" x2="6.34" y2="6.34" />
+                            <line x1="17.66" y1="17.66" x2="19.78" y2="19.78" />
+                            <line x1="2" y1="12" x2="5" y2="12" />
+                            <line x1="19" y1="12" x2="22" y2="12" />
+                            <line x1="4.22" y1="19.78" x2="6.34" y2="17.66" />
+                            <line x1="17.66" y1="6.34" x2="19.78" y2="4.22" />
+                        </g>
+                    </svg>
+                    <svg class="theme-toggle__svg theme-toggle__svg--moon" viewBox="0 0 24 24" focusable="false">
+                        <path d="M21 14.5A8.5 8.5 0 0 1 9.5 3a8.5 8.5 0 1 0 11.5 11.5Z" />
+                    </svg>
+                </span>
+                <span class="theme-toggle__track" aria-hidden="true">
+                    <span class="theme-toggle__thumb"></span>
+                </span>
+                <span class="theme-toggle__label">Dark mode</span>
             </button>
             <span class="footer-text">Protected by <strong>acUsS denied</strong></span>
         </section>

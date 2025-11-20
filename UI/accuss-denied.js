@@ -1,4 +1,4 @@
-// accuss-denied.js
+// accuss-denied.js (fixed)
 // Shared logic for popup + blocked page for "acUsS denied"
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -6,19 +6,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- THEME HANDLING -------------------------------------------------------
   const THEME_KEY = "acuss-denied-theme";
+  const root = document.documentElement;
+  let themeClassApplied = false;
+
+  function reflectThemeOnControl(theme) {
+    const themeBtn = document.getElementById("theme-btn");
+    if (!themeBtn) return;
+    themeBtn.setAttribute("aria-pressed", theme === "dark" ? "true" : "false");
+    themeBtn.dataset.mode = theme;
+    const label = themeBtn.querySelector(".theme-toggle__label");
+    if (label) {
+      label.textContent = theme === "dark" ? "Dark mode" : "Light mode";
+    }
+  }
 
   function applyTheme(theme) {
     // theme = "dark" | "light"
-    document.documentElement.setAttribute("data-theme", theme);
+    root.setAttribute("data-theme", theme);
+    if (!themeClassApplied) {
+      requestAnimationFrame(() => root.classList.add("theme-ready"));
+      themeClassApplied = true;
+    }
+    reflectThemeOnControl(theme);
   }
 
   function initTheme() {
     const stored = localStorage.getItem(THEME_KEY);
+    const storedTheme = stored === "light" || stored === "dark" ? stored : null;
     const prefersDark =
       window.matchMedia &&
       window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    const theme = stored || (prefersDark ? "dark" : "dark"); // default dark
+    // default to user's stored choice, else use system preference, else default to light
+    const theme = storedTheme || (prefersDark ? "dark" : "light");
     applyTheme(theme);
   }
 
@@ -27,7 +47,12 @@ document.addEventListener("DOMContentLoaded", () => {
       document.documentElement.getAttribute("data-theme") || "dark";
     const next = current === "dark" ? "light" : "dark";
     applyTheme(next);
-    localStorage.setItem(THEME_KEY, next);
+    try {
+      localStorage.setItem(THEME_KEY, next);
+    } catch (e) {
+      // localStorage may be restricted in some extension contexts; ignore failures
+      console.warn("acUsS denied: could not save theme:", e);
+    }
   }
 
   initTheme();
@@ -39,6 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- CONTEXT DETECTION ----------------------------------------------------
   const isBlockedPage = !!document.getElementById("blocked-host");
+  // note: your HTML uses id="site-host", so choose that for non-blocked popup
   const hostEl = document.getElementById(
     isBlockedPage ? "blocked-host" : "site-host"
   );
@@ -62,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
     currentUrl = targetFromQuery;
     currentHost = extractHost(targetFromQuery);
     if (hostEl) hostEl.textContent = currentHost;
-  } else if (browserApi && browserApi.tabs) {
+  } else if (browserApi && browserApi.tabs && browserApi.tabs.query) {
     // Popup, or blocked page without target param -> use active tab
     browserApi.tabs
       .query({ active: true, currentWindow: true })
@@ -74,9 +100,13 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .catch((err) => {
         console.error("acUsS denied: could not read active tab", err);
+        // Fallback to current location (best-effort)
+        currentUrl = window.location.href;
+        currentHost = extractHost(currentUrl);
+        if (hostEl) hostEl.textContent = currentHost;
       });
   } else {
-    // Fallback – just use current page URL
+    // Fallback - just use current page URL
     currentUrl = window.location.href;
     currentHost = extractHost(currentUrl);
     if (hostEl) hostEl.textContent = currentHost;
@@ -93,10 +123,10 @@ document.addEventListener("DOMContentLoaded", () => {
         "https://http-observatory.security.mozilla.org/analyze?host=" +
         encodeURIComponent(currentHost);
 
-      if (browserApi && browserApi.tabs) {
+      if (browserApi && browserApi.tabs && browserApi.tabs.create) {
         browserApi.tabs.create({ url: obsUrl });
       } else {
-        window.open(obsUrl, "_blank");
+        window.open(obsUrl, "_blank", "noopener");
       }
     });
   }
@@ -117,9 +147,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const mailUrl = `mailto:support@example.com?subject=${subject}&body=${body}`;
 
-      if (browserApi && browserApi.tabs) {
+      if (browserApi && browserApi.tabs && browserApi.tabs.create) {
+        // open mailto in a new tab if possible
         browserApi.tabs.create({ url: mailUrl });
       } else {
+        // fallback - attempt to open mail client
         window.location.href = mailUrl;
       }
     });
@@ -136,15 +168,28 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
           window.location.href = "about:home";
         }
-      } else if (browserApi && browserApi.tabs && browserApi.tabs.executeScript) {
+      } else if (browserApi && browserApi.tabs && browserApi.tabs.query) {
         // In the popup, make the active tab go back one step
         browserApi.tabs
           .query({ active: true, currentWindow: true })
           .then((tabs) => {
             if (!tabs || !tabs.length) return;
-            browserApi.tabs.executeScript(tabs[0].id, {
-              code: "try { history.back(); } catch (e) {}",
-            });
+            // use scripting or executeScript depending on API availability
+            const tabId = tabs[0].id;
+            try {
+              if (browserApi.tabs.executeScript) {
+                browserApi.tabs.executeScript(tabId, {
+                  code: "try { history.back(); } catch (e) {}",
+                });
+              } else if (browserApi.scripting && browserApi.scripting.executeScript) {
+                browserApi.scripting.executeScript({
+                  target: { tabId },
+                  func: () => { try { history.back(); } catch(e) {} },
+                });
+              }
+            } catch (e) {
+              console.error("acUsS denied: go back failed", e);
+            }
           })
           .catch((err) => console.error("acUsS denied: go back failed", err));
       } else {
@@ -163,7 +208,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const target = targetFromQuery || currentUrl;
         if (!target) return;
 
-        if (browserApi && browserApi.tabs) {
+        if (browserApi && browserApi.tabs && browserApi.tabs.create) {
           browserApi.tabs.create({ url: target });
         } else {
           window.location.href = target;
@@ -177,8 +222,8 @@ document.addEventListener("DOMContentLoaded", () => {
             host: currentHost,
           });
         }
-        // Close popup
-        window.close();
+        // Close popup (may not be permitted in regular pages)
+        try { window.close(); } catch (e) {}
       }
     });
   }
