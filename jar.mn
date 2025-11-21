@@ -1,0 +1,2 @@
+browser.jar:
+    builtin-addons/accuss-denied-v2/ (extension/**)

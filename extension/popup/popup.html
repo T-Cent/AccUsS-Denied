@@ -2,9 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>acUsS denied</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="accuss-denied.css" />
+    <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
     <main class="popup">
@@ -30,14 +28,43 @@
             <span class="section-label">Current site</span>
             <div class="site-row">
                 <!-- Your JS can overwrite this text with the real hostname -->
-                <span id="site-host" class="site-host">example-malicious-site.com</span>
+                <span id="site-host" class="site-host"></span>
                 <span class="badge badge--danger">High risk</span>
             </div>
-            <p class="site-message">
-                We detected patterns similar to known phishing / malware sites.
-                Proceed only if you absolutely trust this website.
+            <p id="site-message">
+                Ad blocking is active
             </p>
+            <button id="adblocking" class="btn btn-secondary" title="Ghostery's ad blocker">Disable ad blocking</button>
         </section>
+
+        <section class="popup__security-info">
+            <h2>Security Details</h2>
+            <div class="security-row">
+                <span class="security-label">Safety:</span>
+                <span id="unsafe"></span>
+            </div>
+            <div class="security-row">
+                <span class="security-label">IP Address:</span>
+                <span id="ip-addr"></span>
+            </div>
+            <div class="security-row">
+                <span class="security-label">Phishing:</span>
+                <span id="phishing"></span>
+            </div>
+            <div class="security-row">
+                <span class="security-label">Malware:</span>
+                <span id="malware"></span>
+            </div>
+            <div class="security-row">
+                <span class="security-label">Spamming:</span>
+                <span id="spamming"></span>
+            </div>
+            <div class="security-row">
+                <span class="security-label">Risk score:</span>
+                <span id="risk-score"></span>
+            </div>
+        </section>
+
 
         <section class="popup__actions">
             <button id="observatory-btn"
@@ -50,15 +77,6 @@
                     class="btn btn-secondary"
                     title="Mail us">
                 Report unsafe website
-            </button>
-        </section>
-
-        <section class="popup__decision">
-            <button id="go-back-btn" class="btn btn-ghost">
-                Go back to safety
-            </button>
-            <button id="proceed-btn" class="btn btn-danger">
-                Proceed anyway
             </button>
         </section>
 
@@ -96,6 +114,6 @@
         </section>
     </main>
 
-    <script src="accuss-denied.js"></script>
+    <script src="../dist/popup.js"></script>
 </body>
 </html>

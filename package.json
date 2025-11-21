@@ -1,0 +1,33 @@
+{
+  "name": "accuss-denied",
+  "version": "1.1.0",
+  "description": "Privacy ad blocker and threat detection with a simplistic UI",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --progress",
+    "build:watch": "npm run build -- -w",
+    "start": "npm run build && web-ext run -s extension/"
+  },
+  "author": "",
+  "license": "MPL-2.0",
+  "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^9.2.1",
+    "web-ext": "1.9.1",
+    "webpack": "^5.103.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": []
+  },
+  "dependencies": {
+    "@ghostery/adblocker-webextension": "^2.12.5",
+    "@mdn/mdn-http-observatory": "^1.4.0"
+  }
+}
